@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obrigado! | Kauã FX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0D0D0D;
+      --bg-gray: #1C1C1C;
+      --accent: #FF5C00;
+      --accent-hover: #FF8C42;
+      --text-light: #F1F1F1;
+      --neon-green: #00FF88;
+      --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(255,92,0,0.05) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(0,255,136,0.03) 0%, transparent 50%);
+    }
+
+    .thank-you-container {
+      max-width: 600px;
+      padding: 3rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .check-animation {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 2rem;
+      position: relative;
+    }
+
+    .check-circle {
+      width: 100%;
+      height: 100%;
+      border: 3px solid var(--accent);
+      border-radius: 50%;
+      position: absolute;
+      animation: pulse 2s infinite;
+    }
+
+    .check-mark {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 50px;
+      height: 50px;
+      opacity: 0;
+      animation: check-appear 0.6s ease-out 0.3s forwards;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, var(--text-light), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+      color: var(--text-light);
+      opacity: 0.9;
+    }
+
+    .buttons-container {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* BOTÃO PRIMÁRIO (VOLTAR) */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      background-color: var(--accent);
+      color: white;
+      box-shadow: 0 0 10px rgba(255, 92, 0, 0.5);
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 0 15px rgba(255, 92, 0, 0.8);
+    }
+
+    /* BOTÃO INSTAGRAM (PROFISSIONAL IDÊNTICO AO PORTFÓLIO) */
+    .btn-instagram {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+      background: rgba(255, 92, 0, 0.1);
+      border: 2px solid rgba(255, 92, 0, 0.3);
+      color: var(--text-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-instagram::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, 
+        #f09433 0%, 
+        #e6683c 25%, 
+        #dc2743 50%, 
+        #cc2366 75%, 
+        #bc1888 100%);
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    .btn-instagram::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        rgba(255,255,255,0.3) 0%,
+        rgba(255,255,255,0) 60%
+      );
+      transform: rotate(30deg);
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      z-index: -1;
+    }
+
+    .btn-instagram:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(224, 58, 117, 0.4);
+      border-color: transparent;
+      color: white;
+    }
+
+    .btn-instagram:hover::before {
+      opacity: 1;
+    }
+
+    .btn-instagram:hover::after {
+      opacity: 0.8;
+    }
+
+    .instagram-icon {
+      width: 20px;
+      height: 20px;
+      transition: all 0.5s ease;
+      fill: currentColor;
+    }
+
+    .btn-instagram:hover .instagram-icon {
+      transform: rotate(10deg) scale(1.2);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+
+    @keyframes check-appear {
+      0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+      80% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    }
+
+    /* ANIMAÇÃO DE PULSAÇÃO PARA BOTÕES */
+    @keyframes button-pulse {
+      0% { transform: translateY(-5px) scale(1); }
+      50% { transform: translateY(-5px) scale(1.05); }
+      100% { transform: translateY(-5px) scale(1); }
+    }
+
+    .btn-instagram:hover, .btn-primary:hover {
+      animation: button-pulse 1.5s infinite alternate;
+    }
+
+    /* RESPONSIVIDADE */
+    @media (max-width: 768px) {
+      .thank-you-container {
+        padding: 2rem;
+      }
+      
+      h1 {
+        font-size: 2rem;
+      }
+      
+      .buttons-container {
+        flex-direction: column;
+      }
+      
+      .btn-primary, .btn-instagram {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="thank-you-container">
+    <div class="check-animation">
+      <div class="check-circle"></div>
+      <svg class="check-mark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 6L9 17L4 12" stroke="#FF5C00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    
+    <h1>Obrigado pelo contato!</h1>
+    <p>Seu formulário foi enviado com sucesso!<br>
+    Em breve entrarei em contato pelo WhatsApp ou e-mail.<br>
+    Enquanto isso, sinta-se à vontade para ver mais do meu trabalho.</p>
+    
+    <div class="buttons-container">
+      <a href="index.html" class="btn-primary">Voltar para o início</a>
+      <a href="https://instagram.com/kaua._fx_" class="btn-instagram" target="_blank">
+        <svg class="instagram-icon" viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+        </svg>
+        Meu Instagram
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Efeito de confetes opcional (leve)
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const colors = ['#FF5C00', '#00FF88', '#F1F1F1'];
+        for (let i = 0; i < 30; i++) {
+          const confetti = document.createElement('div');
+          confetti.style.position = 'fixed';
+          confetti.style.width = '8px';
+          confetti.style.height = '8px';
+          confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.borderRadius = '50%';
+          confetti.style.left = Math.random() * 100 + 'vw';
+          confetti.style.top = '-10px';
+          confetti.style.opacity = '0';
+          confetti.style.animation = `confetti-fall ${Math.random() * 3 + 2}s ease-in ${Math.random() * 0.5}s forwards`;
+          document.body.appendChild(confetti);
+        }
+      }, 500);
+    });
+
+    // Adiciona a animação de confetes ao CSS
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes confetti-fall {
+        0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+        10% { opacity: 1; }
+        100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
