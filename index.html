@@ -626,7 +626,8 @@
         
       .categories-grid {  
         flex-direction: column;  
-        align-items: center;  
+        align-items: center; 
+         
       }  
         
       .category-card {  
@@ -1226,6 +1227,126 @@ footer {
   .youtube-icon:hover {
     animation: pulse 1.5s infinite alternate;
   }
+  /* NOVA CATEGORIA EDIÇÃO */
+.category-card.edition {
+  position: relative;
+}
+
+.category-card.edition::after {
+  content: 'NOVO';
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: var(--accent);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.3rem 0.6rem;
+  border-radius: 20px;
+  z-index: 3;
+}
+
+/* BOTÃO VER FOTOS */
+.portfolio-gallery-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background: rgba(255, 92, 0, 0.1);
+  color: var(--accent);
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: var(--transition);
+  border: 1px solid rgba(255, 92, 0, 0.3);
+}
+
+.portfolio-gallery-btn:hover {
+  background: var(--accent);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(255, 92, 0, 0.3);
+}
+
+/* LISTA DE EFEITOS */
+.effects-list {
+  margin: 0.8rem 0;
+  padding-left: 1.2rem;
+  color: var(--text-gray);
+  font-size: 0.9rem;
+}
+
+.effects-list li {
+  margin-bottom: 0.3rem;
+  position: relative;
+}
+
+.effects-list li::before {
+  content: '•';
+  color: var(--accent);
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+/* BOTÃO ASSISTIR NO DRIVE */
+.drive-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.7rem 1.5rem;
+  background: rgba(255, 92, 0, 0.1);
+  color: var(--accent);
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: var(--transition);
+  border: 1px solid rgba(255, 92, 0, 0.3);
+}
+
+.drive-btn:hover {
+  background: var(--accent);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(255, 92, 0, 0.3);
+}
+
+/* RESPONSIVIDADE PARA FEED NO CELULAR */
+@media (max-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .portfolio-item {
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .portfolio-media {
+    height: 300px;
+  }
+  
+  .portfolio-info {
+    padding: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio-media {
+    height: 250px;
+  }
+  
+  .portfolio-gallery-btn,
+  .drive-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
   </style>  
 </head>  
 <body>  
@@ -1236,13 +1357,13 @@ footer {
         <div class="logo">Kauã FX</div>  
         <span class="logo-subtitle">Videomaker & Fotógrafo</span>  
       </div>  
-     <div class="contact-buttons">  
-          <a href="https://wa.me/554888646926?text=Olá%20Kauã,%20vi%20seu%20portfólio%20e%20gostaria%20de%20saber%20mais%20sobre%20seus%20serviços!" class="btn-whatsapp" target="_blank">  
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.52-.173-.02-.371-.03-.57-.03-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335 .157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-            </svg>
-            WhatsApp
-          </a>
+      <div class="contact-buttons">  
+        <a href="https://wa.me/55488646926?text=Olá%20Kauã,%20vi%20seu%20portfólio%20e%20gostaria%20de%20saber%20mais%20sobre%20seus%20serviços!" class="btn-whatsapp" target="_blank">  
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.52-.173-.02-.371-.03-.57-.03-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335 .157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          WhatsApp
+        </a>
     </header>  
   
     <!-- HERO SECTION -->  
@@ -1260,7 +1381,7 @@ footer {
       <h2 class="section-title">Meus Trabalhos</h2>  
       <div class="categories-grid">  
         <div class="category-card" id="photo-category">  
-          <img src="src/Chapeleiro apontando.jpg" alt="Fotografia Profissional" class="category-img" loading="lazy">  
+          <img src="//live.staticflickr.com/65535/54778704741_53ee72f492_k.jpg" alt="Fotografia Profissional" class="category-img" loading="lazy">  
           <div class="category-content">  
             <h3 class="category-title">Fotografia</h3>  
             <p class="category-desc">Imagens profissionais que contam histórias</p>  
@@ -1273,8 +1394,16 @@ footer {
             <h3 class="category-title">Vídeo</h3>  
             <p class="category-desc">Conteúdo dinâmico para engajar seu público</p>  
           </div>  
-        </div>  
+        </div> 
+        <div class="category-card edition" id="edition-category">  
+  <img src="https://lirp.cdn-website.com/bab17fc6/dms3rep/multi/opt/apps+para+edi%C3%A7%C3%A3o+de+video-1920w.jpg" alt="Edição de Vídeo" class="category-img" loading="lazy">  
+  <div class="category-content">  
+    <h3 class="category-title">Edição</h3>  
+    <p class="category-desc">Pós-produção criativa e técnica</p>  
+  </div>  
+</div> 
       </div>  
+      
     </section>  
   
     <!-- PHOTOGRAPHY PORTFOLIO -->  
@@ -1295,11 +1424,18 @@ footer {
           <div class="portfolio-info">  
             <h3 class="portfolio-client">📍 Happy Pizzaria</h3>  
             <p class="portfolio-type">Fotografia de Produto</p>  
-            <p class="portfolio-desc">Cobertura fotográfica realizada durante o rodízio da Happy Pizzaria, com foco em capturar as pizzas sendo servidas e os detalhes que despertam o apetite. As imagens foram pensadas para uso direto em redes sociais, destacando textura, variedade e o ambiente do local.</p>  
+            <p class="portfolio-desc">Cobertura fotográfica realizada durante o rodízio da Happy Pizzaria, com foco em capturar as pizzas sendo servidas e os detalhes que despertam o apetite. As imagens foram pensadas para uso direto em redes sociais, destacando textura, variedade e o ambiente do local.</p>
+            <a href="galeria.html?client=happy-pizzaria" class="portfolio-gallery-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
+              </svg>
+              Ver Fotos
+            </a>  
             <div class="portfolio-links">
               <div class="portfolio-social">
                   <!-- ... outros elementos ... -->
-                  <a href="https://www.instagram.com/pizzariahappyingleses" class="portfolio-social-icon" target="_blank">
+                  <a href="https://instagram.com/pizzariahappyingleses" class="portfolio-social-icon" target="_blank">
                     <svg viewBox="0 0 24 24" width="18" height="18">
                       <path fill="currentColor" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
                     </svg>
@@ -1315,11 +1451,18 @@ footer {
           <div class="portfolio-info">  
             <h3 class="portfolio-client">📍 Cafeteria Dalla Cruz</h3>  
             <p class="portfolio-type">Fotografia de Produto</p>  
-            <p class="portfolio-desc">Fotografia gastronômica realizada para a Cafeteria Dalla Cruz. Produzi imagens de bolos, croissants e sucos com foco em textura, luz natural e estética minimalista, além de ajudar na composição visual do Instagram da marca.</p>   
+            <p class="portfolio-desc">Fotografia gastronômica realizada para a Cafeteria Dalla Cruz. Produzi imagens de bolos, croissants e sucos com foco em textura, luz natural e estética minimalista, além de ajudar na composição visual do Instagram da marca.</p>
+            <a href="galeria.html?client=dalla-cruz" class="portfolio-gallery-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
+              </svg>
+              Ver Fotos
+            </a>   
             <div class="portfolio-links">
               <div class="portfolio-social">
                   <!-- ... outros elementos ... -->
-                  <a href="https://www.instagram.com/cafeteriadallacruz" class="portfolio-social-icon" target="_blank">
+                  <a href="instagram.com/cafeteriadallacruz" class="portfolio-social-icon" target="_blank">
                     <svg viewBox="0 0 24 24" width="18" height="18">
                       <path fill="currentColor" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
                     </svg>
@@ -1334,11 +1477,18 @@ footer {
           <div class="portfolio-info">  
             <h3 class="portfolio-client">📍 Chapeleiro Maluco</h3>  
             <p class="portfolio-type">Fotografia de Evento</p>  
-            <p class="portfolio-desc">Produzi conteúdo recorrente para o DJ Chapeleiro Maluco, incluindo cobertura de shows e fotos direcionadas a stories e redes sociais, destacando sua presença de palco e identidade visual com imagens de alto impacto.</p>  
+            <p class="portfolio-desc">Produzi conteúdo recorrente para o DJ Chapeleiro Maluco, incluindo cobertura de shows e fotos direcionadas a stories e redes sociais, destacando sua presença de palco e identidade visual com imagens de alto impacto.</p>
+            <a href="galeria.html?client=chapeleiro-maluco" class="portfolio-gallery-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
+              </svg>
+              Ver Fotos
+            </a>  
             <div class="portfolio-links">
               <div class="portfolio-social">
                   <!-- ... outros elementos ... -->
-                  <a href="https://www.instagram.com/dj.chapeleiromaluco" class="portfolio-social-icon" target="_blank">
+                  <a href="instagram.com/dj.chapeleiromaluco" class="portfolio-social-icon" target="_blank">
                     <svg viewBox="0 0 24 24" width="18" height="18">
                       <path fill="currentColor" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
                     </svg>
@@ -1355,16 +1505,22 @@ footer {
             </div>  
        </div>
           <div class="portfolio-item">  
-          <img src="src/Açaí com sticadinho.jpg" alt="Açaí+" class="portfolio-media" loading="lazy">  
+          <img src="//live.staticflickr.com/65535/54778540672_e5f8485738_c.jpg" alt="il campanario villaggio resort" class="portfolio-media" loading="lazy">  
           <div class="portfolio-info">
-            <h3 class="portfolio-client">📍 Mais Açaí loja 2</h3>
-            <p class="portfolio-type">Fotografia de Produto </p>
-            <p class="portfolio-desc">Produção de fotos e vídeo na Loja 2 da Mais Açaí, com a apresentação de taças preparadas especialmente para o conteúdo. As imagens foram criadas com foco em cores, textura e apelo visual, enquanto o vídeo reforçou a experiência do cliente e a identidade da marca nas redes sociais.</p>
-            
+            <h3 class="portfolio-client">📍 IL Campanario Villaggio Resort</h3>
+            <p class="portfolio-type">Fotografia de Imovel </p>
+            <p class="portfolio-desc">Produção fotográfica realizada no Il Campanario, em Jurerê Internacional, para uso no anúncio de um apartamento no Airbnb. As imagens foram desenvolvidas com foco em valorizar os espaços, transmitir conforto e destacar os diferenciais do imóvel, garantindo maior atratividade para potenciais hóspedes.</p>
+            <a href="galeria.html?client=il-campanario-villaggio-resort" class="portfolio-gallery-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
+              </svg>
+              Ver Fotos
+            </a>  
             <div class="portfolio-links">
               <div class="portfolio-social">
                     <!-- ... outros elementos ... -->
-                    <a href="https://www.instagram.com/maissacailoja02?igsh=YWJuZW9uOWxsbGY0" class="portfolio-social-icon" target="_blank">
+                    <a href="https://www.instagram.com/ilcampanario/" class="portfolio-social-icon" target="_blank">
                       <svg viewBox="0 0 24 24" width="18" height="18">
                         <path fill="currentColor" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
                       </svg>
@@ -1379,7 +1535,13 @@ footer {
               <h3 class="portfolio-client">📍 Keef </h3>
               <p class="portfolio-type">Fotografia de Roupas </p>
               <p class="portfolio-desc">Fotografia de moda desenvolvida para a Keef, com foco em composição, textura e identidade visual das peças. As imagens foram utilizadas em divulgação de coleção e redes sociais.</p>
-              
+              <a href="galeria.html?client=keef" class="portfolio-gallery-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                  <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
+                </svg>
+                Ver Fotos
+              </a>
               <div class="portfolio-links">
                 <div class="portfolio-social">
                       <!-- ... outros elementos ... -->
@@ -1393,12 +1555,18 @@ footer {
                 </div>  
            </div>
               <div class="portfolio-item">  
-              <img src="src/Mawa Drinks.jpg" alt="Mahaw" class="portfolio-media" loading="lazy">  
+              <img src="//live.staticflickr.com/65535/54781104520_6eb2b5ec68_k.jpg" alt="madame doces confeitaria" class="portfolio-media" loading="lazy">  
               <div class="portfolio-info">
-                <h3 class="portfolio-client">📍 Mahaw Drinks Floripa </h3>
-                <p class="portfolio-type">Fotografia de Drinks </p>
-                <p class="portfolio-desc">Registrei os drinks da Mahaw com foco no brilho, nas cores e no visual refrescante. Cada clique foi pensado para chamar atenção no feed e dar sede só de olhar.</p>
-                
+                <h3 class="portfolio-client">📍 Madame Doces Confeiraria </h3>
+                <p class="portfolio-type">Fotografia de Doces </p>
+                <p class="portfolio-desc">Ensaio fotográfico de doces em fundo infinito rosa, com foco em realçar cores, texturas e detalhes dos produtos para uso em divulgação e redes sociais.</p>
+                <a href="galeria.html?client=madame-doces-confeitaria" class="portfolio-gallery-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                    <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
+                  </svg>
+                  Ver Fotos
+                </a>
                 <div class="portfolio-links">
                   <div class="portfolio-social">
                         <!-- ... outros elementos ... -->
@@ -1418,7 +1586,13 @@ footer {
           <h3 class="portfolio-client">📍 Javas floripa oficial </h3>
           <p class="portfolio-type">Fotografia de dogs </p>
           <p class="portfolio-desc">Enquanto gravava um desafio gastronômico no local, fui convidado pelo proprietário para registrar os hot dogs da casa. Criei fotos atrativas com foco em sabor e textura, ideais para divulgação nas redes sociais.</p>
-          
+          <a href="galeria.html?client=javasfloripaoficial" class="portfolio-gallery-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+              <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
+            </svg>
+            Ver Fotos
+          </a>
           <div class="portfolio-links">
             <div class="portfolio-social">
                   <!-- ... outros elementos ... -->
@@ -1443,7 +1617,7 @@ footer {
       <h2 class="section-title">Vídeo</h2>  
         
       <div class="portfolio-grid">  
-        <!-- VW Gourmet -->  
+        <!--Roger-->  
         <div class="portfolio-item">  
           <img src="src/Roger.enc" alt="Roger Reis" class="portfolio-media" loading="lazy">  
           <div class="portfolio-info">  
@@ -1485,7 +1659,7 @@ footer {
             <div class="portfolio-links">
               <div class="portfolio-social">
                     <!-- ... outros elementos ... -->
-                    <a href="https://www.instagram.com/fontoura.7" class="portfolio-social-icon" target="_blank">
+                    <a href="https://www.instagram.com/javasfloripaoficial" class="portfolio-social-icon" target="_blank">
                       <svg viewBox="0 0 24 24" width="18" height="18">
                         <path fill="currentColor" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
                       </svg>
@@ -1515,7 +1689,178 @@ footer {
           </div> 
         </div>
       </div>  
-    </section>  
+    </section> 
+
+    <!-- EDITION PORTFOLIO -->  
+<section id="edition-portfolio" class="portfolio-section">  
+  <a href="#" class="back-button" id="back-from-edition">  
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">  
+      <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>  
+    </svg>  
+    Voltar  
+  </a>  
+    
+  <h2 class="section-title">Edição</h2>  
+    
+  <div class="portfolio-grid">  
+    <!-- Projeto 1 -->  
+    <div class="portfolio-item">
+      <!-- Player do vídeo no topo -->
+      <div class="portfolio-media">
+        <iframe width="100%" height="250"
+          src="https://youtube.com/embed/l7AG8eKKV10?feature=share"
+          frameborder="0" allowfullscreen></iframe>
+      </div>
+    
+      <!-- Descrição abaixo -->
+      <div class="portfolio-info">
+        <p class="portfolio-type">Efeito Clone – Vídeo Roger</p>
+        <p class="portfolio-desc">Destaque para técnicas avançadas utilizadas neste projeto:</p>
+    
+        <ul class="effects-list">
+          <li>Efeito clone (duas pessoas na mesma tela)</li>
+          <li>Correção de cor</li>
+          <li>Inserções de PNG</li>
+          <li>Sincronização de legendas</li>
+        </ul>
+      </div>
+    </div>
+    
+    
+    <!-- Projeto 2 -->  
+    <div class="portfolio-item">
+      <!-- Player do vídeo no topo -->
+      <div class="portfolio-media">
+        <iframe width="100%" height="250"
+          src="https://www.youtube.com/embed/3QvwhkdG7hU?si=MD4spWkHcIYydT8d"
+          frameborder="0" allowfullscreen></iframe>
+      </div>
+    
+      <!-- Descrição abaixo -->
+      <div class="portfolio-info">
+        <p class="portfolio-type">Edição de Vídeo influencer - Fontoura</p>
+        <p class="portfolio-desc">Destaque para técnicas utilizadas neste projeto:</p>
+    
+        <ul class="effects-list">
+          <li>Upscaling </li>
+          <li>Correção de cor</li>
+          <li>Transições suaves</li>
+          <li>inserção de textos em momentos especificos</li>
+          <li>crônometro </li>
+          <li>aceleração de video </li>
+          <li>Sincronização de áudio e trilha</li>
+        </ul>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <!-- Player do vídeo no topo -->
+      <div class="portfolio-media" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+  <iframe 
+    src="https://player.vimeo.com/video/1118103960?background=0&autoplay=0&loop=0&muted=0&title=0&byline=0&portrait=0&controls=1"
+    frameborder="0"
+    allow="autoplay; fullscreen; picture-in-picture"
+    allowfullscreen
+    style="position:absolute;top:0;left:0;width:100%;height:100%;">
+  </iframe>
+</div>
+
+    
+      <!-- Descrição abaixo -->
+      <div class="portfolio-info">
+        <p class="portfolio-type">Godzilla Tracking – Estudo em 3D</p>
+        <p class="portfolio-desc">Destaque para técnicas utilizadas neste projeto:</p>
+    
+        <ul class="effects-list">
+          <li>Gravação manual </li>
+          <li>Correção de cor</li>
+          <li>Tracking de cena no After Effects </li>
+          <li>Inserção 3D com plugin Element 3D </li>
+          <li>Adição de efeitos sonoros (SFX) no Premiere Pro </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="portfolio-item">
+      <!-- Player do vídeo no topo -->
+      <div class="portfolio-media" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+  <iframe 
+    src="https://player.vimeo.com/video/1118114240?background=0&autoplay=0&loop=0&muted=0&title=0&byline=0&portrait=0&controls=1"
+    frameborder="0"
+    allow="autoplay; fullscreen; picture-in-picture"
+    allowfullscreen
+    style="position:absolute;top:0;left:0;width:100%;height:100%;">
+  </iframe>
+       </div>
+
+      <!-- Descrição abaixo -->
+      <div class="portfolio-info">
+        <p class="portfolio-type">Tracking Drone (after effects)</p>
+        <p class="portfolio-desc">Destaque para técnicas utilizadas neste projeto:</p>
+    
+        <ul class="effects-list">
+          <li>Gravação Drone </li>
+          <li>Correção de cor</li>
+          <li>Tracking 3D e motion graphics </li>
+          <li>Anotações e destaques no ambiente </li>
+          <li>Adição de efeitos sonoros (SFX) no Premiere Pro </li>
+        </ul>
+        
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <!-- Player do vídeo no topo -->
+      <div class="portfolio-media" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+  <iframe 
+    src="https://player.vimeo.com/video/1118117731?background=0&autoplay=0&loop=0&muted=0&title=0&byline=0&portrait=0&controls=1"
+    frameborder="0"
+    allow="autoplay; fullscreen; picture-in-picture"
+    allowfullscreen
+    style="position:absolute;top:0;left:0;width:100%;height:100%;">
+  </iframe>
+       </div>
+
+      <!-- Descrição abaixo -->
+      <div class="portfolio-info">
+        <p class="portfolio-type">Edição VFX – Estudo usando Sasuke Uchiha</p>
+        <p class="portfolio-desc">Destaque para técnicas utilizadas neste projeto:</p>
+    
+        <ul class="effects-list">
+          <li>Overlay e texto </li>
+          <li>Modelagem 3D</li>
+          <li>Áudio </li>
+          <li>Transições e masking </li>
+          <li>SFX e efeitos manuais </li>
+        </ul>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <!-- Player do vídeo no topo -->
+      <div class="portfolio-media" style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
+  <iframe 
+    src="https://player.vimeo.com/video/1118128155?background=0&autoplay=0&loop=0&muted=0&title=0&byline=0&portrait=0&controls=1"
+    frameborder="0"
+    allow="autoplay; fullscreen; picture-in-picture"
+    allowfullscreen
+    style="position:absolute;top:0;left:0;width:100%;height:100%;">
+  </iframe>
+       </div>
+
+      <!-- Descrição abaixo -->
+      <div class="portfolio-info">
+        <p class="portfolio-type">Hamburgueria – gravação e edição no local</p>
+        <p class="portfolio-desc">Destaque para técnicas utilizadas neste projeto:</p>
+    
+        <ul class="effects-list">
+          <li>Efeitos sonoros (SFX) </li>
+          <li>Transições criativas</li>
+          <li>Ajustes de ritmo e timing </li>
+          <li>Edição de vídeo </li>
+        </ul>
+    
+    </div>
+    </div>
+  </div>  
+</section> 
   
     <!-- ABOUT SECTION -->  
     <section id="about" class="about">  
@@ -1553,7 +1898,7 @@ footer {
         </p>  
           
         <div class="contact-buttons">  
-          <a href="https://wa.me/554888646926?text=Olá%20Kauã,%20vi%20seu%20portfólio%20e%20gostaria%20de%20saber%20mais%20sobre%20seus%20serviços!" class="btn-whatsapp" target="_blank">  
+          <a href="https://wa.me/55488646926?text=Olá%20Kauã,%20vi%20seu%20portfólio%20e%20gostaria%20de%20saber%20mais%20sobre%20seus%20serviços!" class="btn-whatsapp" target="_blank">  
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.52-.173-.02-.371-.03-.57-.03-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335 .157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
@@ -1574,8 +1919,8 @@ footer {
   method="POST"
 >
   <!-- Campos ocultos essenciais -->
-   <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_next" value="https://kaua-fx.github.io/kaua-portfolio/obrigado.html">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_next" value="https://kaua-fx.github.io/seu-repo/obrigado.html">
   <input type="hidden" name="_template" value="table">
   
   <!-- Campos do formulário (ADICIONE 'name' EM TODOS) -->
@@ -1626,7 +1971,7 @@ footer {
           <svg viewBox="0 0 24 24" width="24" height="24">
             <path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
           </svg>
-          <a href="https://tiktok.com/@kaua._fx" class="social-icon tiktok-icon" target="_blank" aria-label="TikTok">
+          <a href="https://tiktok.com/@kaua_.fx" class="social-icon tiktok-icon" target="_blank" aria-label="TikTok">
             <svg viewBox="0 0 24 24">
               <path fill="currentColor" d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
             </svg>
@@ -1745,6 +2090,26 @@ footer {
         heroBg.style.transform = `scale(${1.1 + scrollPosition * 0.0005})`;  
       }  
     }); 
+    // Navegação para a categoria Edição
+const editionCategory = document.getElementById('edition-category');
+const editionPortfolio = document.getElementById('edition-portfolio');
+const backFromEdition = document.getElementById('back-from-edition');
+
+if (editionCategory && editionPortfolio && backFromEdition) {
+  editionCategory.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector('.categories').style.display = 'none';
+    editionPortfolio.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  
+  backFromEdition.addEventListener('click', function(e) {
+    e.preventDefault();
+    editionPortfolio.classList.remove('active');
+    document.querySelector('.categories').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
 </script> 
   </script>
 </body> 
