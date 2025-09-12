@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeria | Kauã FX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* VARIÁVEIS (mesmas do site principal) */
+    :root {
+      --bg-dark: #0D0D0D;
+      --bg-gray: #1A1A1A;
+      --accent: #FF5C00;
+      --accent-hover: #FF8C42;
+      --text-light: #FFFFFF;
+      --text-gray: #CCCCCC;
+      --neon-effect: 0 0 10px rgba(255, 92, 0, 0.7), 0 0 20px rgba(255, 92, 0, 0.4);
+      --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --card-radius: 16px;
+    }
+    
+    /* RESET E BASE */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    /* HEADER DA GALERIA - Estilo moderno e fixo */
+    .gallery-header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(13, 13, 13, 0.98);
+      backdrop-filter: blur(10px);
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 92, 0, 0.15);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .back-link {
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      background: rgba(255, 92, 0, 0.1);
+      border: 1px solid rgba(255, 92, 0, 0.2);
+    }
+    
+    .back-link:hover {
+      color: var(--accent);
+      background: rgba(255, 92, 0, 0.15);
+      transform: translateX(-3px);
+    }
+    
+    .client-info {
+      text-align: center;
+    }
+    
+    .client-info h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      background: linear-gradient(90deg, var(--text-light), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .client-info p {
+      color: var(--text-gray);
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+    
+    .contact-cta {
+      padding: 0.6rem 1.8rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(255, 92, 0, 0.3);
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+    }
+    
+    .contact-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 92, 0, 0.4);
+    }
+    
+    /* HERO DA GALERIA - Design moderno e imersivo */
+    .gallery-hero {
+      margin-top: 100px;
+      height: 70vh;
+      min-height: 500px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0 0 var(--card-radius) var(--card-radius);
+    }
+    
+    .hero-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1.2s ease;
+    }
+    
+    .hero-slide.active {
+      opacity: 1;
+    }
+    
+    .hero-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.85);
+    }
+    
+    .hero-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 3rem 2rem 2rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+      z-index: 2;
+    }
+    
+    .hero-caption h2 {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+    }
+    
+    .hero-caption p {
+      color: var(--text-gray);
+      max-width: 600px;
+      font-size: 1.1rem;
+    }
+    
+    /* CONTADOR DE IMAGENS */
+    .image-counter {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      z-index: 3;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    /* GRADE DE IMAGENS - Layout moderno tipo Pinterest */
+    .gallery-container {
+      padding: 3rem 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.8rem;
+    }
+    
+    .gallery-item {
+      position: relative;
+      border-radius: var(--card-radius);
+      overflow: hidden;
+      cursor: pointer;
+      aspect-ratio: 1;
+      transition: var(--transition);
+      transform-origin: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 15px 35px rgba(255, 92, 0, 0.25);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+    
+    .item-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 1.5rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+      opacity: 0;
+      transition: var(--transition);
+      transform: translateY(10px);
+    }
+    
+    .gallery-item:hover .item-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .item-caption h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    
+    .item-caption p {
+      font-size: 0.85rem;
+      color: var(--text-gray);
+      line-height: 1.5;
+    }
+    
+    .location-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(255, 92, 0, 0.25);
+      color: var(--accent);
+      padding: 0.4rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      margin-top: 0.8rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 92, 0, 0.2);
+    }
+    
+    /* BOTÃO CARREGAR MAIS - Design moderno */
+    .load-more-container {
+      display: flex;
+      justify-content: center;
+      margin: 3rem 0;
+    }
+    
+    .load-more {
+      padding: 1rem 2.5rem;
+      background: transparent;
+      color: var(--text-light);
+      border: 2px solid var(--accent);
+      border-radius: 50px;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      transition: var(--transition);
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .load-more:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 100%;
+      background: var(--accent);
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: -1;
+    }
+    
+    .load-more:hover {
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: var(--neon-effect);
+    }
+    
+    .load-more:hover:before {
+      width: 100%;
+    }
+    
+     /* LIGHTBOX/MODAL - Design moderno e imersivo - CORRIGIDO */
+  .lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.98);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease;
+    padding: 2rem;
+  }
+  
+  .lightbox.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+  }
+  
+  .lightbox-img {
+    max-width: 100%;
+    max-height: 70vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    margin-bottom: 1rem;
+  }
+  
+  .lightbox-caption {
+    text-align: center;
+    max-width: 800px;
+    padding: 1.5rem;
+    background: rgba(30, 30, 30, 0.8);
+    border-radius: var(--card-radius);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    margin-top: auto;
+    overflow-y: auto;
+    max-height: 25vh;
+  }
+  
+  .lightbox-caption h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  
+  .lightbox-caption p {
+    color: var(--text-gray);
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+  
+  .exif-data {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    margin-top: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .exif-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255, 92, 0, 0.1);
+    padding: 0.4rem 0.8rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 92, 0, 0.2);
+  }
+  
+  .lightbox-controls {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    gap: 0.8rem;
+  }
+  
+  .lightbox-btn {
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .lightbox-btn:hover {
+    background: var(--accent);
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 92, 0, 0.5);
+  }
+  
+  .lightbox-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 2rem;
+  }
+  
+  .nav-btn {
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: white;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .nav-btn:hover {
+    background: var(--accent);
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255, 92, 0, 0.5);
+  }
+  
+  /* CONTADOR DE IMAGENS NO LIGHTBOX - NOVO DESIGN */
+  .lightbox-index {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 10;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: var(--transition);
+    opacity: 0.8;
+  }
+  
+  .lightbox-index:hover {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.7);
+  }
+  
+  /* RESPONSIVIDADE AVANÇADA */
+  @media (max-width: 900px) {
+    .lightbox {
+      padding: 1rem;
+    }
+    
+    .lightbox-content {
+      max-width: 95%;
+    }
+    
+    .lightbox-img {
+      max-height: 60vh;
+    }
+    
+    .lightbox-caption {
+      max-height: 30vh;
+      padding: 1rem;
+    }
+    
+    .lightbox-caption h3 {
+      font-size: 1.2rem;
+    }
+    
+    .exif-data {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    
+    .lightbox-index {
+      top: 1rem;
+      left: 1rem;
+      font-size: 0.85rem;
+      padding: 0.4rem 0.8rem;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .lightbox-content {
+      max-width: 100%;
+    }
+    
+    .lightbox-nav {
+      padding: 0 1rem;
+    }
+    
+    .nav-btn {
+      width: 45px;
+      height: 45px;
+    }
+    
+    .lightbox-caption {
+      padding: 1rem;
+      max-height: 35vh;
+    }
+    
+    .lightbox-caption h3 {
+      font-size: 1.1rem;
+    }
+    
+    .lightbox-caption p {
+      font-size: 0.9rem;
+    }
+    
+    .exif-item {
+      font-size: 0.8rem;
+    }
+    
+    .lightbox-index {
+      top: 0.8rem;
+      left: 0.8rem;
+      font-size: 0.8rem;
+    }
+    
+    .lightbox-controls {
+      top: 1rem;
+      right: 1rem;
+    }
+    
+    .lightbox-btn {
+      width: 40px;
+      height: 40px;
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .lightbox-caption {
+      max-height: 40vh;
+    }
+    
+    .lightbox-index {
+      top: 0.5rem;
+      left: 0.5rem;
+      font-size: 0.75rem;
+      padding: 0.3rem 0.6rem;
+    }
+  }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="gallery-header">
+    <a class="back-link" href="index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+      </svg>
+      Voltar
+    </a>
+    <div class="client-info">
+      <h1 id="client-name">Nome do Cliente</h1>
+      <p id="client-sub">Tipo de conteúdo | Local | Ano</p>
+    </div>
+    <div class="gallery-cta">
+      <a href="mailto:kauavisualarts@gmail.com" class="contact-cta">Contratar</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="gallery-hero">
+    <div class="hero-slide active">
+      <img src="" alt="" id="hero-img">
+      <div class="hero-caption">
+        <h2 id="hero-title">Título da imagem</h2>
+        <p id="hero-desc">Descrição da imagem em destaque</p>
+      </div>
+    </div>
+    <div class="image-counter" id="image-counter">1/12</div>
+  </section>
+
+  <!-- GRADE DE IMAGENS -->
+  <div class="gallery-container">
+    <div class="gallery-grid" id="image-grid"></div>
+    <div class="load-more-container">
+      <button class="load-more" id="load-more">Carregar mais</button>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+      <img class="lightbox-img" src="" alt="">
+      <div class="lightbox-caption">
+        <h3></h3>
+        <p></p>
+        <div class="exif-data">
+          <span class="exif-item"></span>
+          <span class="exif-item"></span>
+          <span class="exif-item"></span>
+        </div>
+      </div>
+      <div class="lightbox-index"></div>
+    </div>
+    
+    <div class="lightbox-controls">
+      <button class="lightbox-btn" id="close-lightbox">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+        </svg>
+      </button>
+      <button class="lightbox-btn" id="share-image">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="lightbox-nav">
+      <button class="nav-btn" id="prev-image">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+        </svg>
+      </button>
+      <button class="nav-btn" id="next-image">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- DADOS DA GALERIA (será preenchido via JavaScript) -->
+  <script id="gallery-data" type="application/json">
+    {
+      "client": "",
+      "type": "",
+      "images": []
+    }
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  // Elementos DOM
+  const clientNameEl = document.getElementById('client-name');
+  const clientSubEl = document.getElementById('client-sub');
+  const heroImg = document.getElementById('hero-img');
+  const heroTitle = document.getElementById('hero-title');
+  const heroDesc = document.getElementById('hero-desc');
+  const imageCounter = document.getElementById('image-counter');
+  const imageGrid = document.getElementById('image-grid');
+  const loadMoreBtn = document.getElementById('load-more');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.querySelector('.lightbox-img');
+  const lightboxCaption = document.querySelector('.lightbox-caption');
+  const lightboxIndex = document.querySelector('.lightbox-index');
+  
+  // Variáveis de estado
+  let currentImages = [];
+  let displayedCount = 0;
+  let currentIndex = 0;
+  
+  // DADOS DAS GALERIAS (substitua com suas próprias imagens)
+  const galleriesData = {
+    'happy-pizzaria': {
+      name: 'Happy Pizzaria',
+      type: 'Fotografia Gastronômica',
+      location: 'Ingleses, Florianópolis',
+      year: '2024',
+      images: [
+      {
+          src: '//live.staticflickr.com/65535/54779359501_c0e4bd2f63_k.jpg',
+          alt: 'Rodizio',
+          caption: 'Pizza de chocolate com MMS',
+          location: 'Área interna',
+          exif: 'f/1.7, 1/180s, ISO 160'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54779594843_1960b563f6_k.jpg',
+          alt: 'Pizza Happy Pizzaria',
+          caption: 'Ambiente aconchegante com decoração rústica e iluminação aconchegante',
+          location: 'Florianópolis SC',
+          exif: 'f/1.7, 1/60s, ISO 125'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54779695565_c92a3a7ffc_k.jpg',
+          alt: 'Rodizio',
+          caption: 'Pizza de calabresa',
+          location: 'Área interna',
+          exif: 'f/1.7, 1/45s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54779594788_dd0ca53271_k.jpg',
+          alt: 'Rodizio',
+          caption: 'Pizza de queijo com cheddar',
+          location: 'Área interna',
+          exif: 'f/1.7, 1/45s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54779695535_f9f2011498_k.jpg',
+          alt: 'Rodizio',
+          caption: 'Pizza de queijo com cheddar',
+          location: 'Área interna',
+          exif: 'f/2.4, 1/50s, ISO 125'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54779594808_423994cdf0_k.jpg',
+          alt: 'Drink',
+          caption: 'Drink de limão ciciliano',
+          location: 'Área interna',
+          exif: 'f/1.7, 1/45s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54779594728_b39892bc67_k.jpg',
+          alt: 'Rodizio',
+          caption: 'Pizza de queijo com cheddar',
+          location: 'Área interna',
+          exif: 'f/2.4, 1/50s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54779594733_d06de61bc1_k.jpg',
+          alt: 'Rodizio',
+          caption: 'Pizza de calabresa com queijo',
+          location: 'Área interna',
+          exif: 'f/1.7, 1/45s, ISO 100'
+        }
+      ]
+    },
+    'dalla-cruz': {
+      name: 'Cafeteria Dalla Cruz',
+      type: 'Fotografia de Produto',
+      location: 'Florianópolis, SC',
+      year: '2024',
+      images: [
+        {
+          src: 'src/torta de chocolate.jpg',
+          alt: 'Torta de chocolate com camadas de creme e frutas vermelhas',
+          caption: 'Torta de chocolate',
+          location: 'Cafeteria Dalla Cruz',
+          exif: 'f/2.8, 1/60s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54777612843_d0b1c202ea_z.jpg',
+          alt: 'Croissant artesanal',
+          caption: 'Croissant de pistache',
+          location: 'Cafeteria Dalla Cruz',
+          exif: 'f/3.2, 1/60s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54777602579_cd2e13adb8_k.jpg',
+          alt: 'Tapioca com nutella e morango',
+          caption: 'Tapioca',
+          location: 'Cafeteria Dalla Cruz',
+          exif: 'f/3.2, 1/60s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54777714425_b1cbaf7ef5_k.jpg',
+          alt: 'Bolo de Banana',
+          caption: 'Bolo caseiro ',
+          location: 'Cafeteria Dalla Cruz',
+          exif: 'f/3.2, 1/60s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54776523677_ce13910c5d_k.jpg',
+          alt: 'Bolo de laranja visto de cima',
+          caption: 'Bolo laranja caseiro ',
+          location: 'Cafeteria Dalla Cruz',
+          exif: 'f/3.2, 1/60s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54777602529_422873498e_k.jpg',
+          alt: 'Fatia de bolo com granulado',
+          caption: 'Fatia de bolo ',
+          location: 'Cafeteria Dalla Cruz',
+          exif: 'f/3.2, 1/60s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54777612798_bee7c098c5_k.jpg',
+          alt: 'Fatia de bolo de laranja',
+          caption: 'Fatia de bolo ',
+          location: 'Cafeteria Dalla Cruz',
+          exif: 'f/3.2, 1/60s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54777377836_da66164de7_c.jpg',
+          alt: 'diversidade de sucos',
+          caption: 'Sucos',
+          location: 'Cafeteria Dalla Cruz',
+          exif: 'f/3.2, 1/60s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54777602494_6db8e2cb29_c.jpg',
+          alt: 'suco natural de laranja',
+          caption: 'Suco de laranja',
+          location: 'Cafeteria Dalla Cruz',
+          exif: 'f/3.2, 1/60s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54777602484_bbf2ef3ab9_c.jpg',
+          alt: 'suco natural de morango ',
+          caption: 'Suco de morango',
+          location: 'Cafeteria Dalla Cruz',
+          exif: 'f/3.2, 1/60s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54777612758_40a98c1c64_c.jpg',
+          alt: 'suco natural de morango ',
+          caption: 'Suco de morango',
+          location: 'Cafeteria Dalla Cruz',
+          exif: 'f/3.2, 1/60s, ISO 100'
+        }
+      ]
+    },
+    'chapeleiro-maluco': {
+      name: 'Chapeleiro Maluco',
+      type: 'Fotografia de Evento',
+      location: 'Vários locais',
+      year: '2025',
+      images: [
+       {
+          src: '//live.staticflickr.com/65535/54778933584_8fa1581de4_c.jpg',
+          alt: 'Chapeleiro Maluco em apresentação',
+          caption: 'Chapeleiro fazendo sua performance no show',
+          location: 'Nova trento SC',
+          exif: 'f/2.4, 1/150s, ISO 125'
+        },
+        {
+          src: 'src/Chapeleiro apontando.jpg',
+          alt: 'Chapeleiro Maluco em apresentação',
+          caption: 'Performance em palco com iluminação especial',
+          location: 'Tubarão SC',
+          exif: 'f/2.0, 1/90s, ISO 1300'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54778933619_ba9f61d79e_k.jpg',
+          alt: 'Chapeleiro Maluco em apresentação',
+          caption: 'Plateia ao fundo',
+          location: 'Itapiranga SC',
+          exif: 'f/2.8, 1/90s, ISO 1300'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54778942398_9bb1179a98_k.jpg',
+          alt: 'Chapeleiro Maluco em apresentação',
+          caption: 'Performance em palco',
+          location: 'Itapiranga SC',
+          exif: 'f/2.1, 1/90s, ISO 800'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54778933479_d6af90d3e8_k.jpg',
+          alt: 'Chapeleiro Maluco em apresentação',
+          caption: 'Performance em palco com projeteis',
+          location: 'Nova trento SC',
+          exif: 'f/1.7, 1/60s, ISO 50'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54778942208_3753029cbc_k.jpg',
+          alt: 'Chapeleiro Maluco em apresentação',
+          caption: 'Performance em palco',
+          location: 'Nova trento SC',
+          exif: 'f/2.2, 1/120s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54778942313_5e96495da1_k.jpg',
+          alt: 'Chapeleiro Maluco em apresentação',
+          caption: 'Performance em palco com projeteis',
+          location: 'Nova trento SC',
+          exif: 'f/2.2, 1/120s, ISO 64'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54778704886_5b51245af3_k.jpg',
+          alt: 'Chapeleiro Maluco em apresentação',
+          caption: 'Performance em palco com projeteis',
+          location: 'Nova trento SC',
+          exif: 'f/1.7, 1/120s, ISO 50'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54778704771_d7aadbed5e_k.jpg',
+          alt: 'Chapeleiro Maluco em apresentação',
+          caption: 'Performance em palco',
+          location: 'Tubarão SC',
+          exif: 'f/1.7, 1/120s, ISO 50'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54777850487_b234c5cd42_k.jpg',
+          alt: 'Bobo da corte',
+          caption: 'Performance em palco',
+          location: 'Tubarão SC',
+          exif: 'f/2.8, 1/90s, ISO 800'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54778704746_c2b070720b_k.jpg',
+          alt: 'Chapeleiro Maluco em apresentação',
+          caption: 'Performance em palco com projeteis',
+          location: 'Tubarão SC',
+          exif: 'f/2.8, 1/90s, ISO 800'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54777850482_325eeebda3_k.jpg',
+          alt: 'Chapeleiro Maluco em apresentação',
+          caption: 'Performance em palco',
+          location: 'Tubarão SC',
+          exif: 'f/2.8, 1/90s, ISO 800'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54778942073_b834ff91d5_b.jpg',
+          alt: 'Bobo da corte',
+          caption: 'Performance em palco',
+          location: 'Tubarão SC',
+          exif: 'f/2.8, 1/90s, ISO 800'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54778933269_252b0de069_b.jpg',
+          alt: 'Chapeleiro Bobo da corte e Alice',
+          caption: 'Finalização',
+          location: 'Tubarão SC',
+          exif: 'f/2.8, 1/90s, ISO 800'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54778933279_20d6f8ae7e_b.jpg',
+          alt: 'Chapeleta',
+          caption: 'Poses',
+          location: 'Florianópolis SC',
+          exif: 'f/1.7, 1/20s, ISO 80'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54777850447_21da60bfe7_k.jpg',
+          alt: 'Chapeleta',
+          caption: 'Distraído',
+          location: 'Florianópolis SC',
+          exif: 'f/2.4, 1/20s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54778933249_a2d3738862_k.jpg',
+          alt: 'Chapeleiro',
+          caption: 'Posando',
+          location: 'Florianópolis SC',
+          exif: 'f/2.4, 1/20s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54778942063_ae970bb89b_k.jpg',
+          alt: 'Chapeleiro',
+          caption: 'Posando',
+          location: 'Florianópolis SC',
+          exif: 'f/2.4, 1/20s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54778933259_089f8cd927_k.jpg',
+          alt: 'Chapeleiro',
+          caption: 'Posando',
+          location: 'Florianópolis SC',
+          exif: 'f/2.4, 1/1600s, ISO 50'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54778496072_9da62414c7_k.jpg',
+          alt: 'Trio do Chapeleiro',
+          caption: 'Posando na luz da tarde',
+          location: 'Florianópolis SC',
+          exif: 'f/2.4, 1/350s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54778496057_03e87c1bf9_k.jpg',
+          alt: 'Trio do Chapeleiro',
+          caption: 'Posando na luz da tarde',
+          location: 'Florianópolis SC',
+          exif: 'f/2.4, 1/350s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54779683675_d862de8872_k.jpg',
+          alt: 'Trio do Chapeleiro',
+          caption: 'Posando na luz da tarde',
+          location: 'Florianópolis SC',
+          exif: 'f/2.4, 1/350s, ISO 100'
+        },
+        {
+          src: '//live.staticflickr.com/65535/54778527952_3ea335fc7f_k.jpg',
+          alt: 'Mostrando igredientes para fazer enroladinho de salsicha na arfry',
+          caption: 'Capa de video',
+          location: 'Florianópolis SC',
+          exif: 'f/2.4, 1/60s, ISO 125'
+        }
+      ]
+    },
+'keef': {
+      name: 'Keef',
+      type: 'Fotografia De Moda',
+      location: 'Ingleses, Florianópolis',
+      year: '2024',
+      images: [
+        {
+      src: '//live.staticflickr.com/65535/54779617968_59f061f8ae_b.jpg',
+          alt: 'Moletom branco huntington',
+          caption: 'Fotografia de moda ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/2.2, 1/90s, ISO 100'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779618018_a13e20f6ff_b.jpg',
+          alt: 'Camisa Roxa',
+          caption: 'Fotografia de moda ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/125s, ISO 100'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779612714_4fb38f912f_b.jpg',
+          alt: 'Conjunto hocks',
+          caption: 'Fotografia de moda ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/2.2, 1/90s, ISO 100'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54778531207_ab9bfb16d7_k.jpg',
+          alt: 'Camisa wats',
+          caption: 'Fotografia de moda ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/90s, ISO 100'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779617983_41c4f68e91_k.jpg',
+          alt: 'Conjunto hocks',
+          caption: 'Fotografia de moda ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/2.2, 1/90s, ISO 100'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779617978_3dd0503b8c_k.jpg',
+          alt: 'camisa hocks',
+          caption: 'Fotografia de moda ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/180s, ISO 100'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779612649_3d4c58108d_k.jpg',
+          alt: 'Camisa Roxa Wats',
+          caption: 'Fotografia de moda ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/180s, ISO 100'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54778531147_71ae62fd83_b.jpg',
+          alt: 'Conjunto hocks',
+          caption: 'Fotografia de moda ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/2.2, 1/50s, ISO 100'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779383066_5ad1864c56_k.jpg',
+          alt: 'Tênis GUCCI branco',
+          caption: 'Fotografia de moda ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/3200s, ISO 800'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779617898_83064c79aa_b.jpg',
+          alt: 'Tênis GUCCI preto',
+          caption: 'Fotografia de moda ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/90s, ISO 100'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54778531092_3125e104ce_b.jpg',
+          alt: 'Casacao',
+          caption: 'Fotografia de moda ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/250s, ISO 400'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779382971_b6c5b6146b_k.jpg',
+          alt: 'Moletom branco',
+          caption: 'Fotografia de moda ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/500s, ISO 500'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779719205_e751921970_k.jpg',
+          alt: 'Corta vento ',
+          caption: 'Fotografia de moda ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/500s, ISO 500'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54778531062_c426fe44c9_b.jpg',
+          alt: 'Moletom branco',
+          caption: 'Fotografia de moda ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/500s, ISO 500'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779719210_3e8375b7f9_b.jpg',
+          alt: 'Tenis Branco AIR',
+          caption: 'Fotografia de moda ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/500s, ISO 500'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54780657546_e034a01628_k.jpg',
+          alt: 'Tenis Branco',
+          caption: 'Fotografia de moda ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/500s, ISO 500'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779807857_41787e2217_b.jpg',
+          alt: 'Tenis Preto Curto',
+          caption: 'Fotografia de moda ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/500s, ISO 500'
+        },
+        ]
+    },
+'javasfloripaoficial': {
+      name: 'Javas Floripa',
+      type: 'Fotografia De Gastronomia',
+      location: 'Rio vermelho, Florianópolis',
+      year: '2025',
+      images: [
+        {
+      src: '//live.staticflickr.com/65535/54779622538_9f8fdcddaa_b.jpg',
+          alt: 'Dog Doritos',
+          caption: 'Dog Doritos ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/90s, ISO 160'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54778535822_8fcd1340bd_k.jpg',
+          alt: 'Fotografia de gastronomia',
+          caption: 'Dog De Queijo ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/90s, ISO 160'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779387606_e45d28cd0a_b.jpg',
+          alt: 'Fotografia de gastronomia',
+          caption: 'Dog mexicano ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/90s, ISO 160'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779617069_9a7cf2088c_k.jpg',
+          alt: 'Fotografia de gastronomia',
+          caption: 'Dog Mexicano ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/90s, ISO 160'
+      },
+        {
+      src: '//live.staticflickr.com/65535/54779622613_6a4522dec1_k.jpg',
+          alt: 'Fotografia de gastronomia',
+          caption: 'Dog Mexicano ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/60s, ISO 100'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779387651_b6533613f7_k.jpg',
+          alt: 'Fotografia de gastronomia',
+          caption: 'Dog Mexicano ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/60s, ISO 100'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779622678_20795d5758_c.jpg',
+          alt: 'Fotografia de gastronomia',
+          caption: '4 dogs ',
+          location: 'Ingleses Florianópolis SC ',
+          exif: 'f/1.7, 1/60s, ISO 320'
+        }
+        ]
+    },
+'il-campanario-villaggio-resort': {
+      name: 'IL Campanario Villaggio Resort',
+      type: 'Fotografia De Imovel',
+      location: 'Jurerê Internacional, Florianópolis',
+      year: '2025',
+      images: [
+        {
+      src: '//live.staticflickr.com/65535/54778540672_e5f8485738_c.jpg',
+          alt: 'Piscina Espaço familia ',
+          caption: 'IL Campanario Villaggio Resort ',
+          location: 'Jurerê Internacional, Florianópolis SC ',
+          exif: 'f/1.7, 1/90s, ISO 160'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779627298_7661e0240c_c.jpg',
+          alt: 'Piscina Espaço familia',
+          caption: 'IL Campanario Villaggio Resort ',
+          location: 'Jurerê Internacional, Florianópolis SC ',
+          exif: 'f/2.2, 1/60s, ISO 64'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54778540667_086e9d36d2_c.jpg',
+          alt: 'Piscina Espaço familia',
+          caption: 'IL Campanario Villaggio Resort ',
+          location: 'Jurerê Internacional, Florianópolis SC ',
+          exif: 'f/2.2, 1/2100s, ISO 50'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779621649_72fa02ecba_c.jpg',
+          alt: 'Espaço kids',
+          caption: 'IL Campanario Villaggio Resort ',
+          location: 'Jurerê Internacional, Florianópolis SC ',
+          exif: 'f/2.2, 1/60s, ISO 100'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54778540772_af501253cb_c.jpg',
+          alt: 'Espaço kids',
+          caption: 'IL Campanario Villaggio Resort ',
+          location: 'Jurerê Internacional, Florianópolis SC ',
+          exif: 'f/2.2, 1/60s, ISO 100'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779627338_3eff232179_c.jpg',
+          alt: 'Espaço kids',
+          caption: 'IL Campanario Villaggio Resort ',
+          location: 'Jurerê Internacional, Florianópolis SC ',
+          exif: 'f/2.2, 1/60s, ISO 100'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779392101_5d0918ea9b_c.jpg',
+          alt: 'Espaço kids',
+          caption: 'IL Campanario Villaggio Resort ',
+          location: 'Jurerê Internacional, Florianópolis SC ',
+          exif: 'f/2.2, 1/60s, ISO 100'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779728185_116483b94b_c.jpg',
+          alt: 'Espaço kids',
+          caption: 'IL Campanario Villaggio Resort ',
+          location: 'Jurerê Internacional, Florianópolis SC ',
+          exif: 'f/2.2, 1/60s, ISO 100'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54778540577_8cd3bd0ec3_c.jpg',
+          alt: 'Espaço kids',
+          caption: 'IL Campanario Villaggio Resort ',
+          location: 'Jurerê Internacional, Florianópolis SC ',
+          exif: 'f/2.2, 1/60s, ISO 100'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779627223_dec85b86a6_c.jpg',
+          alt: 'Espaço kids',
+          caption: 'IL Campanario Villaggio Resort ',
+          location: 'Jurerê Internacional, Florianópolis SC ',
+          exif: 'f/2.2, 1/60s, ISO 160'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779627233_6116f51152_c.jpg',
+          alt: 'Espaço kids',
+          caption: 'IL Campanario Villaggio Resort ',
+          location: 'Jurerê Internacional, Florianópolis SC ',
+          exif: 'f/2.2, 1/60s, ISO 400'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779392131_eacdde722d_c.jpg',
+          alt: 'Quarto de hospede',
+          caption: 'IL Campanario Villaggio Resort ',
+          location: 'Jurerê Internacional, Florianópolis SC ',
+          exif: 'f/2.2, 1/60s, ISO 200'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779392106_cc33666fc8_c.jpg',
+          alt: 'Quarto de hospede',
+          caption: 'IL Campanario Villaggio Resort ',
+          location: 'Jurerê Internacional, Florianópolis SC ',
+          exif: 'f/2.2, 1/60s, ISO 250'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779392181_b9c6e7022f_c.jpg',
+          alt: 'Sala de Jogos',
+          caption: 'IL Campanario Villaggio Resort ',
+          location: 'Jurerê Internacional, Florianópolis SC ',
+          exif: 'f/2.2, 1/60s, ISO 250'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54778540712_fd40ca3cf7_c.jpg',
+          alt: 'Sala de Jogos',
+          caption: 'IL Campanario Villaggio Resort ',
+          location: 'Jurerê Internacional, Florianópolis SC ',
+          exif: 'f/2.2, 1/60s, ISO 250'
+        },
+        ]
+    },
+'madame-doces-confeitaria': {
+      name: 'Madame Doces Confeitaria',
+      type: 'Fotografia De Doces',
+      location: 'Praia Brava, Florianópolis',
+      year: '2025',
+      images: [
+        {
+      src: '//live.staticflickr.com/65535/54781104520_e231e0c4b0_b.jpg',
+          alt: 'Doces ',
+          caption: 'Brigadeiros ',
+          location: 'Praia Brava, Florianópolis SC ',
+          exif: 'f/2.4, 1/60s, ISO 50'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54781001754_c16f438c13_k.jpg',
+          alt: 'Paçoca ',
+          caption: 'Brigadeiro ',
+          location: 'Praia Brava, Florianópolis SC ',
+          exif: 'f/2.4, 1/60s, ISO 50'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54781001779_6d8a46ec33_b.jpg',
+          alt: 'Sabor Chocolate ',
+          caption: 'Brigadeiro ',
+          location: 'Praia Brava, Florianópolis SC ',
+          exif: 'f/2.4, 1/60s, ISO 50'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54780771176_ab7b6dd458_k.jpg',
+          alt: 'Sabor Chocolate ',
+          caption: 'Brigadeiro ',
+          location: 'Praia Brava, Florianópolis SC ',
+          exif: 'f/2.4, 1/60s, ISO 50'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54779922322_a64ead27cf_k.jpg',
+          alt: 'Sabor Beijinho ',
+          caption: 'Brigadeiro ',
+          location: 'Praia Brava, Florianópolis SC ',
+          exif: 'f/2.4, 1/60s, ISO 50'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54781104750_e019679208_k.jpg',
+          alt: 'em caixa aberta ',
+          caption: 'Brigadeiros ',
+          location: 'Praia Brava, Florianópolis SC ',
+          exif: 'f/2.4, 1/30s, ISO 50'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54781011418_19f9fa3636_b.jpg',
+          alt: 'recheio morango ',
+          caption: 'Doces ',
+          location: 'Praia Brava, Florianópolis SC ',
+          exif: 'f/1.7, 1/60s, ISO 50'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54781011433_1964a4efbf_k.jpg',
+          alt: 'recheio morango ',
+          caption: 'Doce ',
+          location: 'Praia Brava, Florianópolis SC ',
+          exif: 'f/2.4, 1/20s, ISO 50'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54781104815_e9e4adb97c_k.jpg',
+          alt: 'recheio morango ',
+          caption: 'Doce ',
+          location: 'Praia Brava, Florianópolis SC ',
+          exif: 'f/2.4, 1/20s, ISO 50'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54781001979_8097a0241e_b.jpg',
+          alt: 'recheio morango ',
+          caption: 'Doce ',
+          location: 'Praia Brava, Florianópolis SC ',
+          exif: 'f/2.4, 1/20s, ISO 50'
+        },//live.staticflickr.com/65535/54780771416_c3262ab44a_b.jpg
+        {
+      src: '//live.staticflickr.com/65535/54780771416_c3262ab44a_b.jpg',
+          alt: 'recheio morango ',
+          caption: 'Doce ',
+          location: 'Praia Brava, Florianópolis SC ',
+          exif: 'f/2.4, 1/20s, ISO 50'
+        },
+        {
+      src: '//live.staticflickr.com/65535/54781140005_28a5ed5f72_k.jpg',
+          alt: 'recheio morango ',
+          caption: 'Doce ',
+          location: 'Praia Brava, Florianópolis SC ',
+          exif: 'f/2.4, 1/20s, ISO 50'
+        },
+      ]
+    },
+    
+    // Adicione mais galerias aqui para outros clientes
+  };
+
+  // Inicializar a galeria
+  function initGallery() {
+    // Parâmetros da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const clientSlug = urlParams.get('client');
+    
+    if (clientSlug && galleriesData[clientSlug]) {
+      loadGalleryFromURL(clientSlug);
+    } else {
+      // Redirecionar para a página principal se não houver cliente válido
+      window.location.href = 'index.html';
+    }
+    
+    // Configurar botão "Carregar mais"
+    setupLoadMore();
+  }
+
+  // Função para carregar a galeria com base no parâmetro da URL
+  function loadGalleryFromURL(clientSlug) {
+    const galleryData = galleriesData[clientSlug];
+    
+    // Atualizar informações do cabeçalho
+    clientNameEl.textContent = galleryData.name;
+    clientSubEl.textContent = `${galleryData.type} | ${galleryData.location} | ${galleryData.year}`;
+    
+    // Atualizar título da página
+    document.title = `${galleryData.name} | Galeria | Kauã FX`;
+    
+    // Configurar imagem do herói (primeira imagem da galeria)
+    if (galleryData.images.length > 0) {
+      const firstImage = galleryData.images[0];
+      heroImg.src = firstImage.src;
+      heroImg.alt = firstImage.alt;
+      heroTitle.textContent = galleryData.name;
+      heroDesc.textContent = firstImage.caption;
+      imageCounter.textContent = `1/${galleryData.images.length}`;
+    }
+    
+    // Armazenar imagens e renderizar
+    currentImages = galleryData.images;
+    displayedCount = Math.min(12, currentImages.length);
+    renderImages(displayedCount);
+    
+    // Configurar botão "Carregar mais"
+    if (currentImages.length <= 12) {
+      loadMoreBtn.style.display = 'none';
+    } else {
+      loadMoreBtn.style.display = 'block';
+    }
+  }
+
+  // Configurar botão "Carregar mais"
+  function setupLoadMore() {
+    loadMoreBtn.addEventListener('click', function() {
+      displayedCount = Math.min(displayedCount + 12, currentImages.length);
+      renderImages(displayedCount);
+      
+      if (displayedCount >= currentImages.length) {
+        loadMoreBtn.style.display = 'none';
+      }
+    });
+  }
+
+  // Renderizar imagens na grade
+  function renderImages(count) {
+    // Limpar grade (exceto as primeiras imagens se já existirem)
+    if (count <= 12) {
+      imageGrid.innerHTML = '';
+    }
+    
+    for (let i = imageGrid.children.length; i < count; i++) {
+      if (i >= currentImages.length) break;
+      
+      const image = currentImages[i];
+      const item = document.createElement('div');
+      item.className = 'gallery-item fade-in';
+      item.setAttribute('role', 'button');
+      item.setAttribute('tabindex', '0');
+      item.setAttribute('aria-label', `Ver imagem ${i+1}: ${image.caption}`);
+      
+      item.innerHTML = `
+        <img 
+          src="${image.src}" 
+          alt="${image.alt}" 
+          loading="${i < 6 ? 'eager' : 'lazy'}"
+        >
+        <div class="item-caption">
+          <h3>${image.caption}</h3>
+          <p>${image.alt}</p>
+          <div class="location-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+            </svg>
+            ${image.location}
+          </div>
+        </div>
+      `;
+      
+      item.addEventListener('click', () => openLightbox(i));
+      item.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          openLightbox(i);
+        }
+      });
+      
+      imageGrid.appendChild(item);
+    }
+  }
+  
+  // Abrir lightbox
+  function openLightbox(index) {
+    currentIndex = index;
+    const image = currentImages[index];
+    
+    lightboxImg.src = image.src;
+    lightboxImg.alt = image.alt;
+    lightboxCaption.querySelector('h3').textContent = image.caption;
+    lightboxCaption.querySelector('p').textContent = image.alt;
+    
+    // Adicionar dados EXIF se disponíveis
+    const exifItems = lightboxCaption.querySelectorAll('.exif-item');
+    if (image.exif) {
+      const exifData = image.exif.split(', ');
+      exifItems.forEach((item, i) => {
+        if (exifData[i]) {
+          item.textContent = exifData[i];
+        }
+      });
+      lightboxCaption.querySelector('.exif-data').style.display = 'flex';
+    } else {
+      lightboxCaption.querySelector('.exif-data').style.display = 'none';
+    }
+    
+    lightboxIndex.textContent = `${index + 1} / ${currentImages.length}`;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Focar no lightbox para acessibilidade
+    lightbox.focus();
+  }
+  
+  // Fechar lightbox
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+  
+  // Navegar entre imagens no lightbox
+  function navigateImage(direction) {
+    currentIndex = (currentIndex + direction + currentImages.length) % currentImages.length;
+    openLightbox(currentIndex);
+  }
+  
+  // Compartilhar imagem
+  function shareImage() {
+    const image = currentImages[currentIndex];
+    
+    if (navigator.share) {
+      navigator.share({
+        title: image.caption,
+        text: image.alt,
+        url: window.location.href
+      }).catch(console.error);
+    } else {
+      // Fallback para copiar URL
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        alert('Link copiado para a área de transferência!');
+      });
+    }
+  }
+  
+  // Event listeners
+  document.getElementById('close-lightbox').addEventListener('click', closeLightbox);
+  document.getElementById('prev-image').addEventListener('click', () => navigateImage(-1));
+  document.getElementById('next-image').addEventListener('click', () => navigateImage(1));
+  document.getElementById('share-image').addEventListener('click', shareImage);
+  
+  // Teclado navegação
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.classList.contains('active')) {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navigateImage(-1);
+      if (e.key === 'ArrowRight') navigateImage(1);
+    }
+  });
+  
+  // Swipe para mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+  
+  lightbox.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+  
+  lightbox.addEventListener('touchend', (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+  
+  function handleSwipe() {
+    if (touchEndX < touchStartX - 50) navigateImage(1);
+    if (touchEndX > touchStartX + 50) navigateImage(-1);
+  }
+  
+  // Inicializar
+  initGallery();
+});
+  </script>
+</body>
+</html>
